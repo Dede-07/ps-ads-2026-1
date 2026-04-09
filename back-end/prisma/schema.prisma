@@ -56,4 +56,13 @@ model User {
  is_admin          Boolean       @default(false)
 }
 
+model Seller{
+  id               Int           @id @default(autoincrement())
+  fullname         String        // Nome completo
+  birth_date       DateTime?     // Data de nascimento / opcional
+  identity_document   String     @unique// Documento
+  email            String        @unique //email
+  phone            String        // Telefone
+  is_manager        Boolean       @default(false) // Se é gerente ou ñ / Valor padrão => false
+}
 
