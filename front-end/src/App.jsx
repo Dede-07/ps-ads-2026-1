@@ -18,8 +18,18 @@ import FooterBar from './ui/FooterBar'
 
 import AppRoutes from './routes/AppRoutes'
 
+import AuthContext from './contexts/AuthContext'
 
 function App() {
+   const [authState, setAuthState] = React.useState({
+   authUser: null,
+   redirectTo: null
+ })
+ const {
+   authUser,
+   redirectTo
+ } = authState
+
  return (
    <>
      <ThemeProvider theme={theme}>
@@ -27,6 +37,13 @@ function App() {
        <CssBaseline />
       
        <BrowserRouter>
+       {/* Qualquer componente carregado entre <AuthContext.Provider> e
+             </AuthContext.Provider> poderá acessar os dados compartilhados
+             por AuthProvider por meio do 'value'
+         */}
+
+         <AuthContext.Provider value={{ authState, setAuthState }}>
+
          <HeaderBar />
 
 
@@ -37,6 +54,8 @@ function App() {
 
 
          <FooterBar />
+
+         </AuthContext.Provider>
        </BrowserRouter>
     
      </ThemeProvider>
