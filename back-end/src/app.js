@@ -6,6 +6,13 @@ import indexRouter from './routes/index.js'
 
 const app = express()
 
+import cors from 'cors'
+
+app.use(cors({
+    origin: process.env.ALLOWED_ORIGINS.split(','),
+    credentials: true   // Habilita o envio de cookies para o front-end
+}))
+
 app.use(logger('dev'))
 app.use(json())
 app.use(urlencoded({ extended: false }))
@@ -29,14 +36,5 @@ app.use('/users', usersRoute)
 
 import sellersRoute from './routes/sellers.js'
 app.use('/sellers', sellersRoute)
-
-import cors from 'cors'
-
-
-app.use(cors({
- origin: process.env.ALLOWED_ORIGINS.split(','),
- // credentials: true   // Habilita o envio de cookies para o front-end
-}))
-
 
 export default app
